@@ -18,8 +18,17 @@ jobs:
       - restore_cache:
           key: ng-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm install
+      - run: npm install --save-dev firebase-tools
       - save_cache:
           key: ng-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test
+      - run:
+          name: "Run test"
+          command: npm run test
+      - run:
+          name: "Build application for production"
+          command: npm run build
+      - run:
+          name: "Deploy app tp Firebase Hosting"
+          command: "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
