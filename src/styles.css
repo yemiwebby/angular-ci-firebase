@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+.page-content {
+  margin-top: 100px;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minimax(305px, 1fr));
+  grid-gap: 15px;
+}
